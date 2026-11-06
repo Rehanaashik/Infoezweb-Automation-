@@ -1,9 +1,13 @@
 package baseclass;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -11,11 +15,13 @@ public class Base{
 	
 	public static WebDriver driver;
 	public static Actions action;
+	public static WebDriverWait wait;
 	
 	public static WebDriver launchbrowser() {
 		WebDriverManager.chromedriver().setup();
 		driver=new ChromeDriver();
 		action=new Actions(driver);
+	   
 		return driver;
 	}
 	
@@ -39,6 +45,16 @@ public class Base{
 		Element.sendKeys( text);
 	}
 	
+	
+	public static void elementToBeclick(WebElement element) {
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+		}
+		public static void visibilitywait(WebElement element) {
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		wait.until(ExpectedConditions.visibilityOf(element));
+		}
+	
 	public static void acceptalert() {
 		driver.switchTo().alert().accept();
 	}
@@ -57,6 +73,8 @@ public class Base{
     	driver.switchTo().alert().sendKeys(text);
     }
 	
+    
+    
 	public static void closebrowser() {
 		driver.close();
 	}

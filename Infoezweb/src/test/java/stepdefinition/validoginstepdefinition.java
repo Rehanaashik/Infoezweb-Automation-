@@ -1,7 +1,10 @@
 
 package stepdefinition;
 
+import java.time.Duration;
+
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseclass.Base;
 import io.cucumber.java.en.Given;
@@ -43,7 +46,7 @@ public void user_clicks_the_submit_button() {
 @Then("{string} should be displayed")
 public void should_be_displayed(String expectedMessage) throws InterruptedException {
 	
-	Thread.sleep(3000);
+	WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
 	
 	if(expectedMessage.equals("Invalid email")) {
 		Assert.assertTrue(l.Invalidemail.isDisplayed());

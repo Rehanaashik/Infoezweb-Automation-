@@ -1,12 +1,15 @@
 package stepdefinition;
 
+import java.time.Duration;
+
 import org.junit.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseclass.Base;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import locator.Registration;
 import locator.SearchHomepage;
 
 public class Searchstepdefinition extends Base {
@@ -49,12 +52,15 @@ public class Searchstepdefinition extends Base {
 		}
 		
 		else if (ExpectedResults.equalsIgnoreCase("Invalid search")) {
-			Thread.sleep(3000);
+			
+		   Base.visibilitywait(s.notfound);
+			
+		//	Base.wait.until(ExpectedConditions.visibilityOf(s.notfound));
 			Assert.assertTrue(s.notfound.isDisplayed());
 		}
 		
 		else if (ExpectedResults.equalsIgnoreCase("Empty search")) {
-			Assert.assertTrue(driver.getCurrentUrl().contains("/search"));
+			Assert.assertFalse(driver.getCurrentUrl().contains("/search"));
 			
 		}
 	    

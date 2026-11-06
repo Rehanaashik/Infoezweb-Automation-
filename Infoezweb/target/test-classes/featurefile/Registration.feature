@@ -11,6 +11,6 @@ Then "<ExpectedResult>" should be displayed after registration
 
 Examples:
 |name   |email           |phone     |password|ExpectedResult|
-|ajay   |ajay129@infoez.com |987654321 |1234567 |success         |
-|karthik|karthik097       |567       |9876543 |Invalid email   |
-|vikram  |vikram950@infoez.com|1        |12      |Invalid password|
+|ajay   |ajay771@infoez.com |987654321 |1234567 |success         |
+|karthik|karthik656     |567       |9876543 |Invalid email   |
+|vikram  |vikram744@infoez.com|1        |12      |Invalid password|

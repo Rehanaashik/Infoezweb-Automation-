@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 		@CucumberOptions(
-		features = "src/test/java/featurefile",
+		features = "src/test/java/featurefile/Claim.feature",
 		glue = "stepdefinition",
 		 
 		dryRun = false,
@@ -43,7 +43,7 @@ import io.cucumber.junit.CucumberOptions;
 		    }
 
 		    @AfterClass
-		    public static void close() {
+		    public static void quit() {
 		        quitbrowser();
 		    }
 		}

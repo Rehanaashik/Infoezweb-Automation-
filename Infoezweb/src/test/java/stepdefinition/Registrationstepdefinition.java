@@ -1,14 +1,17 @@
 
 	
-	package stepdefinition;
+package stepdefinition;
 
 
-	import org.junit.Assert;
+import java.time.Duration;
+
+import org.junit.Assert;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseclass.Base;
-	import io.cucumber.java.en.Given;
-	import io.cucumber.java.en.Then;
-	import io.cucumber.java.en.When;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import locator.Registration;
 
 
@@ -58,7 +61,7 @@ import locator.Registration;
 	@Then("{string} should be displayed after registration")
 	public void expected_result_should_be_displayed_after_registration(String expectedResult) throws InterruptedException {
 		
-		Thread.sleep(6000);
+		//WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(6));
 		
 		if(expectedResult.equals("success")) {
 			Assert.assertTrue(driver.getCurrentUrl().contains("cloudfront"));
