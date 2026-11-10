@@ -1,4 +1,3 @@
-
 package stepdefinition;
 
 import java.time.Duration;
@@ -50,8 +49,7 @@ public class Saveunsavestepdefinition extends Base {
     @When("user navigates to the business details pages")
     public void user_navigates_to_the_business_details_pages() {
 
-        elementToBeclick(s.explore);
-        s.explore.click();
+        
 
         visibilitywait(s.businessname);
 
@@ -62,7 +60,7 @@ public class Saveunsavestepdefinition extends Base {
 
         s.businessname.click();
 
-        visibilitywait(s.favorite);
+        Base.staleElementWait(s.favorite);
 
         System.out.println("Business Details Page Opened");
     }
@@ -71,7 +69,7 @@ public class Saveunsavestepdefinition extends Base {
     @When("user {string} the business")
     public void user_the_business(String action) {
 
-        visibilitywait(s.favorite);
+        Base.staleElementWait(s.favorite);
 
         ((JavascriptExecutor) driver).executeScript(
             "arguments[0].scrollIntoView({block:'center'});",

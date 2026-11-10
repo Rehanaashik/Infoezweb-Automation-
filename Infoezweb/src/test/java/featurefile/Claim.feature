@@ -1,18 +1,17 @@
-Feature:Business claim verification
-Scenario Outline:verify claim functionality with different conditions
+Feature: Business Claim Verification
 
+Scenario Outline: Verify claim functionality with valid and invalid details
 
-Given user launches the application infoez url
-When user login status is login "<login>"
-And user navigates to the business details entered page
-And user clicks the claim button
-And user enters reason "<reason>"
-And user enters the proof url "<proof>"
-And user clicks on submit claim button
-Then "<expectedconditions>" should be displaying
+Given user launches the application using Infoez URL
+ When user logs in to the application
+  And user navigates to the Business Details page
+    And user clicks on the Claim button 
+    And user enters reason "<reason>" 
+    And user enters proof URL "<proof>"
+     And user clicks on the Submit Claim button 
+     Then "<expectedconditions>" should be displaying
 
 Examples:
-| login | reason         | proof           | expectedconditions  |
-| yes   | Business owner | https://abc.com | claimalready pending|
-| No    | Business owner | https://abc.com | please signin first |
-| yes   | Business owner |                 | claim should not submit |
+ | reason         |proof            | expectedconditions | 
+ | Business owner | https://abc.com | Claim already pending |
+  | Business owner|                | proof should be submitted |

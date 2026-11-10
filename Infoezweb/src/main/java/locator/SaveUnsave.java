@@ -26,9 +26,12 @@ WebDriver driver;
 	@FindBy(xpath="//button[@data-testid='header-signin-btn']")
 	public WebElement signin;
 
-	@FindBy(xpath="//*[contains(normalize-space(),'Petal & Loom Bakery')]")
-	public WebElement businessname;
 	
+	
+	 @FindBy(xpath = "//h3[contains(text(),'Bloom Beauty Studio')]")
+	    public WebElement businessname;
+	 
+	 
 	@FindBy(xpath="//a[@data-testid='nav-explore']")
 	public WebElement explore;
 

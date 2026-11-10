@@ -1,135 +1,135 @@
 
 package stepdefinition;
 
+import java.time.Duration;
+
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import baseclass.Base;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.Then;
 import locator.Claim;
 
 public class Claimstepdefinition extends Base {
 
     Claim c;
-    WebDriverWait wait;
 
-    @Given("user launches the application infoez url")
-    public void user_launches_the_application_infoez_url() {
+    @Given("user launches the application using Infoez URL")
+    public void user_launches_the_application_using_infoez_url() {
 
         launchbrowser();
         maximizebrowser();
-
-        openurl("https://d2mojgetgp5xie.cloudfront.net/search");
+        openurl("https://d2mojgetgp5xie.cloudfront.net");
 
         c = new Claim(driver);
     }
 
-    // Login functionality
-    @When("user login status is login {string}")
-    public void user_login_status_is_login(String login) {
+    @When("user logs in to the application")
+    public void user_logs_in_to_the_application() {
 
-        if (login.equalsIgnoreCase("yes")) {
+    	elementToBeclick(c.signin);
+        c.signin.click();
 
-            elementToBeclick(c.signin);
-            c.signin.click();
+        visibilitywait(c.email);
+        c.email.clear();
+        sendkeys(c.email, "customer@infoez.com");
 
-            visibilitywait(c.email);
-            c.email.sendKeys("customer@infoez.com");
+        visibilitywait(c.password);
+        c.password.clear();
+        sendkeys(c.password, "Customer@123");
 
-            visibilitywait(c.password);
-            c.password.sendKeys("customer@123");
+        elementToBeclick(c.submit);
+        c.submit.click();
 
-            elementToBeclick(c.submit);
-            c.submit.click();
-
-        } else if (login.equalsIgnoreCase("no")) {
-
-            System.out.println("User continues without login");
-
-        } else {
-
-            Assert.fail("Invalid login status: " + login);
-        }
     }
+
+
+
+@When("user navigates to the Business Details page")
+public void user_navigates_to_the_Business_Details_page() {
+
+	
+    visibilitywait(c.businessname);
+
+    ((JavascriptExecutor) driver).executeScript(
+        "arguments[0].scrollIntoView({block:'center'});",
+        c.businessname
+    );
+
+    c.businessname.click();
 
     
-    @When("user navigates to the business details entered page")
-    public void user_navigates_to_the_business_details_entered_page() {
+    visibilitywait(c.claimbutton);
 
-        elementToBeclick(c.businessname);
-        c.businessname.click();
-    }
+    System.out.println("Business Details Page Opened");
+}
 
-   
-    @When("user clicks the claim button")
-    public void user_clicks_the_claim_button() {
+    @When("user clicks on the Claim button")
+    public void user_clicks_on_the_claim_button() {
+
+        visibilitywait(c.claimbutton);
+
+        ((JavascriptExecutor) driver).executeScript(
+            "arguments[0].scrollIntoView({block:'center'});",
+            c.claimbutton
+        );
 
         elementToBeclick(c.claimbutton);
         c.claimbutton.click();
+
+        System.out.println("Claim Button Clicked");
     }
 
-    
     @When("user enters reason {string}")
     public void user_enters_reason(String reason) {
 
         visibilitywait(c.claimreason);
-
-        c.claimreason.clear();
-
-        if (!reason.isEmpty()) {
-            c.claimreason.sendKeys(reason);
-        }
+        c.claimreason.sendKeys(reason);
     }
 
-   
-    @When("user enters the proof url {string}")
-    public void user_enters_the_proof_url(String proof) {
+    @When("user enters proof URL {string}")
+    public void user_enters_proof_url(String proof) {
 
-        visibilitywait(c.claimproof);
-
-        c.claimproof.clear();
-
-        if (!proof.isEmpty()) {
+        
+            visibilitywait(c.claimproof);
             c.claimproof.sendKeys(proof);
         }
-    }
-
     
-    @When("user clicks on submit claim button")
-    public void user_clicks_on_submit_claim_button() {
+
+    @When("user clicks on the Submit Claim button")
+    public void user_clicks_on_the_submit_claim_button() {
 
         elementToBeclick(c.claimsubmitbutton);
         c.claimsubmitbutton.click();
+
+        System.out.println("Submit Claim Clicked");
     }
 
-   
     @Then("{string} should be displaying")
-    public void should_be_displaying(String expectedconditions) {
+    public void claim_message_should_be_displaying(String messages) {
 
-        String pageSource = driver.getPageSource().toLowerCase();
+        Base.visibilitywait(c.pendingmsg);
 
-        if (expectedconditions.equalsIgnoreCase("claim already pending")
-                || expectedconditions.equalsIgnoreCase("claimalready pending")) {
+        if (messages.equals("Claim already pending")) {
 
-            Assert.assertTrue(
-                "Claim already pending message not displayed",
-                pageSource.contains("claim already pending")
+            boolean result = wait.until(driver ->
+                driver.getPageSource().contains("Claim already pending")
             );
 
-        } else if (expectedconditions.equalsIgnoreCase("please signin first")
-                || expectedconditions.equalsIgnoreCase("please sign in first")) {
+            Assert.assertTrue(result);
 
-            Assert.assertTrue(
-                "Please sign in message not displayed",
-                pageSource.contains("please sign in")
-                || pageSource.contains("please signin")
-            );
+        }
 
-        } else {
+        else if (messages.equals("proof should be submitted")) {
 
-            Assert.fail("Unexpected expected condition: " + expectedconditions);
+            boolean result = driver.getPageSource()
+                .contains("proof should be submitted");
+
+            Assert.assertTrue(result);
         }
     }
 }
