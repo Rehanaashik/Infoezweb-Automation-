@@ -11,7 +11,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 		@CucumberOptions(
-		features = "src/test/java/featurefile/Claim.feature",
+		features = "src/test/java/featurefile/pricing.feature",
 		glue = "stepdefinition",
 		 
 		dryRun = false,

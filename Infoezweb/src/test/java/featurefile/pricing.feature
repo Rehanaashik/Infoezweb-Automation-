@@ -11,4 +11,3 @@ Examples:
 |loginstatus|plan    |validationsss|
 | logged in|   Free    |      Subscription updated       |
 |   not logged in |  Enterprise     |    Please sign in to subscribe          |
-

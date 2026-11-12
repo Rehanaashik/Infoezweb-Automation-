@@ -16,10 +16,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class Base{
 	
 	public static WebDriver driver;
+	public static boolean isBrowserOpen = false;
 	public static Actions action;
 	public static WebDriverWait wait;
 	
 	public static WebDriver launchbrowser() {
+		
+		//if(!isBrowserOpen) {
+		//	isBrowserOpen = true;
+		
 		ChromeOptions options=new ChromeOptions();
 		Map<String,Object> pref=new HashMap<>();
 		pref.put("Credentials_enable_service",false);
@@ -40,6 +45,8 @@ public class Base{
 	   
 		//return driver;
 	}
+		//return driver;
+	//}
 	
 	public static void openurl(String url) {
 		driver.get(url);
@@ -78,6 +85,15 @@ public class Base{
 		    wait.ignoring(StaleElementReferenceException.class)
 		        .until(ExpectedConditions.visibilityOf(element));
 		}
+		
+		public static void invisiblewait(WebElement element) {
+
+		     wait = new WebDriverWait(
+		        driver, Duration.ofSeconds(20)
+		    );
+
+		    wait.until(ExpectedConditions.invisibilityOf(element));
+		}
 	
 	public static void acceptalert() {
 		driver.switchTo().alert().accept();
@@ -104,8 +120,10 @@ public class Base{
 	}
 	
 	public static void quitbrowser() {
+		//if (driver !=null) {
 		driver.quit();
+		//isBrowserOpen = false;
 	}
 	
-
-}
+	}
+//}

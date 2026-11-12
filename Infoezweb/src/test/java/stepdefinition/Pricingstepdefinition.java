@@ -1,8 +1,7 @@
-
 package stepdefinition;
 
 import org.junit.Assert;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.JavascriptExecutor;
 
 import baseclass.Base;
 import io.cucumber.java.en.Given;
@@ -72,7 +71,8 @@ public class Pricingstepdefinition extends Base {
 
             } else {
 
-                click(p.freebutton);
+               JavascriptExecutor js = (JavascriptExecutor)driver;
+               js.executeScript("arguments[0].click();",p.freebutton);
             }
 
         } else if (plan.trim().equalsIgnoreCase("Enterprise")) {
