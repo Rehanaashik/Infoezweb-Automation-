@@ -9,6 +9,8 @@ Then "<ExpectedResults>" should be displayed in validation
 Examples:
 
 |business|city      |ExpectedResults|
-|gym     |bengaluru |Success       |
+|gym     |bengaluru |URL redirected |
 |rehhh   |theni     |Invalid search |
+|cafe    |chennai   |Businesses     |
 |        |chennai   |Empty search   |
+|        |          |Empty search  |

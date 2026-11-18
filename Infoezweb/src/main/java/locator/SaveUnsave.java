@@ -40,6 +40,22 @@ WebDriver driver;
 	@FindBy(xpath="//button[contains(@data-testid,'favorite-toggle-btn')]")
 	public WebElement favorite;
 	
+	@FindBy(xpath = "//button[@data-testid='user-menu-btn']")
+    public WebElement profilebtn;
+	
+	@FindBy(xpath = "//div[@data-testid='menu-favorites']")
+    public WebElement myfavorites;
+	
+	@FindBy(xpath = "//li[@data-sonner-toast]")
+    public WebElement toastmsg;
+	
+	
+	@FindBy(xpath = "//*[contains(text(),'Bloom Beauty Studio')]")
+    public WebElement bloom;
+	
+	@FindBy(xpath = "//div[contains(text(),'Removed from favorites')]")
+    public WebElement toastmsg1;
+	
 	
 	
 	

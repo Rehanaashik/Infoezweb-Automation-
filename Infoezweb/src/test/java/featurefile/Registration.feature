@@ -6,11 +6,14 @@ And user enters a name "<name>"
 And user enters the email "<email>"
 And user enters the phone no"<phone>"
 And user enters the password"<password>"
-And user clicks the submit button
+And user clicks the submitted buttons
 Then "<ExpectedResult>" should be displayed after registration
 
 Examples:
-|name   |email           |phone     |password|ExpectedResult|
-|ajay   |ajay771@infoez.com |987654321 |1234567 |success         |
-|karthik|karthik656     |567       |9876543 |Invalid email   |
-|vikram  |vikram744@infoez.com|1        |12      |Invalid password|
+|name   |email                 |phone     |password|ExpectedResult |
+|ajay   |ajay771@infoez.com    |987654321 |1234567 |Url redirected   |
+|karthik|karthik656            |567       |9876543 |Invalid email   |
+|vikram |vikram744@infoez.com  |1245      |12      |Invalid password|
+|       |                      |          |        |Please fill out this field |
+|saai   |saai908@infoez.com    |987654321 |1234567 |Welcome to Infoez!  |
+|akshaya|akshaya910@infoez.com |@#$%      |1234567 |Please enter a valid phoneno   |

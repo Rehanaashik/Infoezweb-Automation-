@@ -23,7 +23,7 @@ public class Base{
 	public static WebDriver launchbrowser() {
 		
 		//if(!isBrowserOpen) {
-		//	isBrowserOpen = true;
+			//isBrowserOpen = true;
 		
 		ChromeOptions options=new ChromeOptions();
 		Map<String,Object> pref=new HashMap<>();
@@ -33,10 +33,10 @@ public class Base{
 		options.setExperimentalOption("prefs",pref);
 		options.addArguments("--disable-save-password-bubble");
 		options.addArguments("--disable-features=passwordLeakDetection");
-		 driver = new ChromeDriver(options);
+		
+		  driver = new ChromeDriver(options);
 		  wait=new WebDriverWait(driver,Duration.ofSeconds(30));
-		   
-		  driver.get("https://d2mojgetgp5xie.cloudfront.net/");
+		  driver.get("https://d2mojgetgp5xie.cloudfront.net");
 		  return driver;
 
 		//WebDriverManager.chromedriver().setup();
@@ -68,6 +68,9 @@ public class Base{
 		Element.sendKeys( text);
 	}
 	
+	public static void clear(WebElement Element) {
+		Element.clear();
+	}
 	
 	public static void elementToBeclick(WebElement element) {
 		wait = new WebDriverWait(driver, Duration.ofSeconds(20));

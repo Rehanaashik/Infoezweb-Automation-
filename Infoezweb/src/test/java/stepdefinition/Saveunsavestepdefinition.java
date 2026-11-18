@@ -30,18 +30,18 @@ public class Saveunsavestepdefinition extends Base {
     public void user_login_to_the_applications() {
 
         elementToBeclick(s.signin);
-        s.signin.click();
+        click(s.signin);
 
         visibilitywait(s.email);
-        s.email.clear();
+        clear(s.email);
         sendkeys(s.email, "customer@infoez.com");
 
         visibilitywait(s.password);
-        s.password.clear();
+        clear(s.password);
         sendkeys(s.password, "Customer@123");
 
         elementToBeclick(s.submit);
-        s.submit.click();
+       click(s.submit);
 
     }
 
@@ -58,7 +58,7 @@ public class Saveunsavestepdefinition extends Base {
             s.businessname
         );
 
-        s.businessname.click();
+       click(s.businessname);
 
         Base.staleElementWait(s.favorite);
 
@@ -79,10 +79,10 @@ public class Saveunsavestepdefinition extends Base {
         elementToBeclick(s.favorite);
 
         if (action.equalsIgnoreCase("save")) {
-            s.favorite.click();
+            click(s.favorite);
 
         } else if (action.equalsIgnoreCase("unsave")) {
-            s.favorite.click();
+           click(s.favorite);
 
         }
     }
@@ -102,8 +102,81 @@ public class Saveunsavestepdefinition extends Base {
 
             Assert.assertTrue(true);
             System.out.println("Business Unsaved Successfully");
+            
+            Base.invisiblewait(s.toastmsg1);
 
         }
     }
+    
+    @When("user navigates to My favourites page")
+    public void user_navigates_to_my_favourites_page() {
+    	
+    	((JavascriptExecutor) driver).executeScript(
+    		    "arguments[0].scrollIntoView({block:'center'});",
+    		    s.profilebtn
+    		);
+    	
+    	Base.invisiblewait(s.toastmsg);
+    	Base.elementToBeclick(s.profilebtn);
+    	click(s.profilebtn);
+    	
+    	Base.elementToBeclick(s.myfavorites);
+    	
+    	click(s.myfavorites);
+        
+    }
+
+    @Then("business should be {string} in My Favourites")
+    public void business_should_be_in_my_favourites(String status) {
+    	
+    	if(status.equalsIgnoreCase("displayed")) {
+    		
+    		Base.visibilitywait(s.bloom);
+    	
+    	Assert.assertTrue(driver.getPageSource().contains("Bloom Beauty Studio"));
+    	
+    	}
+    	
+    	
+    	else if(status.equalsIgnoreCase("not displayed")) {
+    		
+    	//	Base.visibilitywait(s.bloom);
+    		
+    		
+    		Assert.assertFalse(driver.getPageSource().contains("Bloom Beauty Studio"));
+    	}
+       
+    }
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }

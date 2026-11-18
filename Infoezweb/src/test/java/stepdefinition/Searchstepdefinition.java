@@ -28,14 +28,14 @@ public class Searchstepdefinition extends Base {
 	}
 
 	@When("user enters the business name {string}")
-	public void user_enters_the_business_name(String business) {
-		sendkeys(s.businesssearch, business);
+	public void user_enters_the_business_name(String String) {
+		sendkeys(s.businesssearch, String);
 	    
 	}
 
 	@When("user enters the city name {string}")
-	public void user_enters_the_city_name(String city) {
-		sendkeys(s.citysearch,city);
+	public void user_enters_the_city_name(String String) {
+		sendkeys(s.citysearch,String);
 	    
 	}
 
@@ -47,7 +47,7 @@ public class Searchstepdefinition extends Base {
 
 	@Then("{string} should be displayed in validation")
 	public void should_be_displayed_in_validation(String ExpectedResults) throws InterruptedException {
-		if(ExpectedResults.equalsIgnoreCase("Success")) {
+		if(ExpectedResults.equalsIgnoreCase("URL redirected")) {
 			Assert.assertTrue(driver.getCurrentUrl().contains("/search"));
 		}
 		
@@ -55,8 +55,12 @@ public class Searchstepdefinition extends Base {
 			
 		   Base.visibilitywait(s.notfound);
 			
-		//	Base.wait.until(ExpectedConditions.visibilityOf(s.notfound));
+		
 			Assert.assertTrue(s.notfound.isDisplayed());
+		}
+		
+		if(ExpectedResults.equalsIgnoreCase("Businesses")) {
+			Assert.assertTrue(driver.getPageSource().contains("Businesses"));
 		}
 		
 		else if (ExpectedResults.equalsIgnoreCase("Empty search")) {

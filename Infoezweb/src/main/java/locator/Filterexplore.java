@@ -2,6 +2,8 @@
 
 package locator;
 
+import java.util.List;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -59,4 +61,32 @@ public class Filterexplore {
     // After clear filter
     @FindBy(xpath="//*[contains(normalize-space(.),'Aroma Cafe')]")
     public WebElement afterclear;
+  
+    
+    @FindBy(xpath="//a[starts-with(@data-testid,'business-card-')]//div[normalize-space()='Fitness & Wellness']")
+    public List<WebElement> fitnesswellness;
+
+    @FindBy(xpath="//span[normalize-space()='5.0']")
+    public List<WebElement> toprated1;
+
+    @FindBy(xpath="//svg[contains(@class,'badge-check') and contains(@class,'text-emerald-600')]")
+    public List<WebElement> verified;
+    
+    @FindBy(xpath="//a[starts-with(@data-testid,'business-card-')]")
+    public List<WebElement> businesslist;
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

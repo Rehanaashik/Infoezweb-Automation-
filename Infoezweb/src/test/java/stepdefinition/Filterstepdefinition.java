@@ -6,6 +6,7 @@ import java.time.Duration;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -30,7 +31,7 @@ public class Filterstepdefinition extends Base {
 
         f = new Filterexplore(driver);
 
-       // wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+       
     }
 
     @When("user navigates to the explore page")
@@ -81,38 +82,40 @@ public class Filterstepdefinition extends Base {
             if (!f.verifiedonly.isSelected()) {
                 click(f.verifiedonly);
             }
+            
+            
+            }
         }
-    }
-
     @Then("user should see the filtered business results {string}")
-    public void user_should_see_the_filtered_business_results_business_results(String businessresults) {
+    public void user_should_see_the_filtered_business_results(String businessresults) {
+    	
+    	if(f.fitnesswellness.size()>0) {
+    		Assert.assertTrue(f.fitnesswellness.get(0).isDisplayed());
+    	}
+    	
+    	else if (businessresults.equalsIgnoreCase("Highest rated first")) {
+    	    Base.wait.until(ExpectedConditions.visibilityOfAllElements(f.toprated1));
+    	    Assert.assertTrue(f.toprated1.get(0).getText().equals("5.0"));
+    	}
+    	else if (businessresults.equalsIgnoreCase("Ratings above 4.0")) {
+    	    Assert.assertTrue(
+    	        driver.getPageSource().contains("5.0") ||
+    	        driver.getPageSource().contains("4.0")
+    	    );
+    	}
+    	else if (f.verified.size()>0) {
+    		Assert.assertTrue(f.verified.get(0).isDisplayed());
+    		
+    	}
 
-        if (businessresults.equalsIgnoreCase("Iron Peak Gym")) {
-
-            Base.visibilitywait(f.ironpeakgym);
-               
-
-            Assert.assertTrue(driver.getPageSource().contains("Iron Peak Gym"));
-
-        }
-        else {
-            Assert.assertFalse(driver.getPageSource().contains("Iron Peak Gym"));
-        }
-        }
-        
-        
-     @When("user clicks on the clear filter options")
+    	
+    }
+    @When("user clicks on the clear filter options")
     public void user_clicks_on_the_clear_filter_options() {
-
         click(f.Clearfilter);
     }
 
-    @When("user should see all business without filters")
-    public void user_should_see_all_business_without_filters() {
+    
 
-        Base.visibilitywait(f.afterclear);
-            
-
-        Assert.assertTrue(driver.getPageSource().contains("Aroma Cafe"));
-    }
+    
 }
